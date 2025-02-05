@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('document_id');
             $table->timestamps();
 
-            $table->unique(['client_id', 'car_id']);
             $table->unique(['client_id', 'car_id', 'lognumber']);
         });
     }
