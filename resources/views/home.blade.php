@@ -6,17 +6,14 @@
 
         <title>Autószervíz naplókezelés</title>
 
-        <style type="text/css">
-            .search_area{
-                border: 2px solid deepskyblue;
-            }
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
+        
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 
-            .clients{
-                border: 2px solid seagreen;
-            }
-        </style>
     </head>
     <body>
+
         <div class="search_area">
             <div class="search_form">
                 <h1>Keresés</h1>
@@ -42,13 +39,17 @@
                 </tr>
                 @foreach($clients as $index => $client)
                 <tr>
-                    <td><?= $client->id ?></td>
-                    <td><?= $client->name ?></td>
+                    <td class="client_id"><?= $client->id ?></td>
+                    <td class="client_name"><?= $client->name ?></td>
                     <td><?= $client->idcard ?></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><table></table></td>
                 </tr>
                 @endforeach
             </table>
 
         </div>
+
     </body>
 </html>
