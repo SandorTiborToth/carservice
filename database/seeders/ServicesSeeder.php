@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
-use App\Models\Services;
+use App\Models\Service;
 
 class ServicesSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class ServicesSeeder extends Seeder
         $services = json_decode($json);
 
         foreach ($services as $service => $value) {
-            Services::create([
+            Service::create([
                 'id' => $value->id,
                 'client_id' => $value->client_id,
                 'car_id' => $value->car_id,

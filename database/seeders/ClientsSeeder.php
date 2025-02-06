@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
-use App\Models\Clients;
+use App\Models\Client;
 
 class ClientsSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class ClientsSeeder extends Seeder
         $clients = json_decode($json);
 
         foreach ($clients as $client => $value) {
-            Clients::create([
+            Client::create([
                 'id' => $value->id,
                 'name' => $value->name,
                 'idcard' => $value->idcard

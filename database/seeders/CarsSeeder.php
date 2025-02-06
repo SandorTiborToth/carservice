@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
-use App\Models\Cars;
+use App\Models\Car;
 
 class CarsSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class CarsSeeder extends Seeder
         $cars = json_decode($json);
 
         foreach ($cars as $car => $value) {
-            Cars::create([
+            Car::create([
                 'id' => $value->id,
                 'client_id' => $value->client_id,
                 'car_id' => $value->car_id,
