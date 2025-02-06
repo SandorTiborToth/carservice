@@ -32,6 +32,13 @@ $(document).ready(function(){
                 data: { 'client_id' : client_id },
                 dataType: "json",
                 success: function(response){
+                    table.append('<tr>\
+                                <th>Autó sorszáma</th>\
+                                <th>Autó típusa</th>\
+                                <th>Regisztrálás időpontja</th>\
+                                <th>Saját márkás-e</th>\
+                                <th>Balesetek száma</th>\
+                            </tr>');
                     $.each(response.cars, function(key, item){
                         table.append('<tr>\
                                     <td>' + item.car_id + '</td>\
