@@ -33,7 +33,22 @@
 
         <div class="clients">
             <h2>Az ügyfelek adatainak listája</h2>
-            
+
+            <table>
+                <tr>
+                    <th>Ügyfél azonosító</th>
+                    <th>Név</th>
+                    <th>Okmányazonosító</th>
+                </tr>
+                @foreach($clients as $index => $client)
+                <tr>
+                    <td><?= $client->id ?></td>
+                    <td><?= $client->name ?></td>
+                    <td><?= $client->idcard ?></td>
+                </tr>
+                @endforeach
+            </table>
+
         </div>
     </body>
 </html>
