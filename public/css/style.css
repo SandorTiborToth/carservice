@@ -5,3 +5,7 @@
 .clients{
     border: 2px solid seagreen;
 }
+
+.warning{
+    color: red;
+}

@@ -17,14 +17,15 @@
         <div class="search_area">
             <div class="search_form">
                 <h1>Keresés</h1>
-                <form>
-                    Ügyfél neve: <input type="text" name="clients_name">
-                    Ügyfél okmányazonosítója: <input type="text" name="clients_idcard">
+                <form method="get" class="client_idcard_form">
+                    Ügyfél neve: <input type="text" name="clients_name" id="clients_name">
+                    Ügyfél okmányazonosítója: <input type="text" name="clients_idcard" id="clients_idcard" pattern="[A-Za-z0-9]+">
                     <button>Keresés</button>
                 </form>
+                <div class="warning"></div>
             </div>
             <div class="search_result">
-                <h2>Keresés eredménye</h2>
+                
             </div>
         </div>
 

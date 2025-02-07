@@ -56,7 +56,6 @@ $(document).ready(function(){
     * Show the service log of the specified car
     */
     $(document).on('click', '.car_serial', function(){
-        console.log("kattintva");
         let car_id = $(this).html();
         let client_id = $(this).attr('data-client-id');
         
@@ -85,8 +84,90 @@ $(document).ready(function(){
                             </tr>');
                 });
             }
-        });        
+        });
     });
 
+
+    /*
+    * Show the filtered search
+    */
+    $(document).on('submit', '.client_idcard_form', function(event){
+        event.preventDefault();
+        console.log("urlap");
+
+        if ($('#clients_name').val() == "" && $('#clients_idcard').val() == "") {
+            
+            $('.warning').html('Valamelyik mező kitöltése kötelező!');
+        
+        }else if ($('#clients_name').val() != "" && $('#clients_idcard').val() != "") {
+        
+            $('.warning').html('Csak az egyik mezőt töltse ki!');
+        
+        }else{
+            $('.warning').html('');
+            if ($('#clients_name').val() != "") {
+                submit_clients_name($('#clients_name').val());
+            }else{
+                submit_clients_idcard($('#clients_idcard').val());
+            }
+        }
+    });
+
+
+
+    function submit_clients_name(client_name_pattern) {
+        $.ajax({
+            type: "GET",
+            url: "/filter-by-client-name",
+            data: { 'client_name_pattern' : client_name_pattern },
+            dataType: "json",
+            success: function(response){
+                $('.search_result').html('');
+                $('.search_result').append('<table><tr>\
+                            <th>Ügyfél azonosítója</th>\
+                            <th>Ügyfél neve</th>\
+                            <th>Ügyfél okmányazonosítója</th>\
+                            <th>Autóinak darabszáma</th>\
+                            <th>Összes naplóbejegyzés száma</th>\
+                        </tr>\
+                        <tr>\
+                            <td>' + response.client.id + '</td>\
+                            <td>' + response.client.name + '</td>\
+                            <td>' + response.client.idcard + '</td>\
+                            <td></td>\
+                            <td></td>\
+                        </tr>\
+                        </table>');                
+            }
+        });
+    }
+
+
+    function submit_clients_idcard(client_idcard_pattern) {
+        $.ajax({
+            type: "GET",
+            url: "/filter-by-client-idcard",
+            data: { 'client_idcard_pattern' : client_idcard_pattern },
+            dataType: "json",
+            success: function(response){
+                $('.search_result').html('');
+                $('.search_result').append('<table><tr>\
+                            <th>Ügyfél azonosítója</th>\
+                            <th>Ügyfél neve</th>\
+                            <th>Ügyfél okmányazonosítója</th>\
+                            <th>Autóinak darabszáma</th>\
+                            <th>Összes naplóbejegyzés száma</th>\
+                        </tr>\
+                        <tr>\
+                            <td>' + response.client.id + '</td>\
+                            <td>' + response.client.name + '</td>\
+                            <td>' + response.client.idcard + '</td>\
+                            <td></td>\
+                            <td></td>\
+                        </tr>\
+                        </table>');                
+            }
+        });        
+    }
 
 });
