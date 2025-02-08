@@ -36,6 +36,8 @@ $(document).ready(function(){
                                 <th>Regisztrálás időpontja</th>\
                                 <th>Saját márkás-e</th>\
                                 <th>Balesetek száma</th>\
+                                <th>Utolsó szervízbejegyzés</th>\
+                                <th>Utolsó szervízbejegyzés dátuma</th>\
                             </tr>');
                     $.each(response.cars, function(key, item){
                         table.append('<tr>\
@@ -44,6 +46,8 @@ $(document).ready(function(){
                                     <td>' + item.registered + '</td>\
                                     <td>' + item.ownbrand + '</td>\
                                     <td>' + item.accident + '</td>\
+                                    <td>' + item.event + '</td>\
+                                    <td>' + item.eventtime + '</td>\
                                 </tr>');
                     });
                 }
