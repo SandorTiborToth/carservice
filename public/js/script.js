@@ -59,13 +59,6 @@ $(document).ready(function(){
     * Show the service log of the specified car
     */
     $(document).on('click', '.car_serial', function(){
-
-        /*let car_id = $(this).html();
-        let client_id = $(this).attr('data-client-id');
-        
-        $(this).parent().after('<tr><td colspan="5"><table></table></td></tr>');*/
-
-
         if ($(this).attr('data-clicked') == 'true') {
             $(this).attr('data-clicked','false');
             let table = $(this).parent().next().find('table');
@@ -113,19 +106,21 @@ $(document).ready(function(){
     */
     $(document).on('submit', '.client_idcard_form', function(event){
         event.preventDefault();
-        console.log("urlap");
 
-        if ($('#clients_name').val() == "" && $('#clients_idcard').val() == "") {
+        let clients_name_value = $.trim($('#clients_name').val());
+        let clients_idcard_value = $.trim($('#clients_idcard').val());
+
+        if (clients_name_value == "" && clients_idcard_value == "") {
             
             $('.warning').html('Valamelyik mező kitöltése kötelező!');
         
-        }else if ($('#clients_name').val() != "" && $('#clients_idcard').val() != "") {
+        }else if (clients_name_value != "" && clients_idcard_value != "") {
         
             $('.warning').html('Csak az egyik mezőt töltse ki!');
         
         }else{
             $('.warning').html('');
-            if ($('#clients_name').val() != "") {
+            if (clients_name_value != "") {
                 submit_clients_name($('#clients_name').val());
             }else{
                 submit_clients_idcard($('#clients_idcard').val());
