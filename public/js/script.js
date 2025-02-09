@@ -138,21 +138,27 @@ $(document).ready(function(){
             data: { 'client_name_pattern' : client_name_pattern },
             dataType: "json",
             success: function(response){
-                $('.search_result').append('<table><tr>\
-                            <th>Ügyfél azonosítója</th>\
-                            <th>Ügyfél neve</th>\
-                            <th>Ügyfél okmányazonosítója</th>\
-                            <th>Autóinak darabszáma</th>\
-                            <th>Összes naplóbejegyzés száma</th>\
-                        </tr>\
-                        <tr>\
-                            <td>' + response.client.id + '</td>\
-                            <td>' + response.client.name + '</td>\
-                            <td>' + response.client.idcard + '</td>\
-                            <td></td>\
-                            <td></td>\
-                        </tr>\
-                        </table>');                
+                if(response.count_of_clients > 1){
+                    $('.warning').html('A megadott keresésnek több ügyfél felel meg. Pontosabb nevet adjon meg.');
+                }else if (response.count_of_clients == 0) {
+                    $('.warning').html('A megadott keresésnek megfelelő ügyfél nem található.');
+                }else{
+                    $('.search_result').append('<table><tr>\
+                                <th>Ügyfél azonosítója</th>\
+                                <th>Ügyfél neve</th>\
+                                <th>Ügyfél okmányazonosítója</th>\
+                                <th>Autóinak darabszáma</th>\
+                                <th>Összes naplóbejegyzés száma</th>\
+                            </tr>\
+                            <tr>\
+                                <td>' + response.client.id + '</td>\
+                                <td>' + response.client.name + '</td>\
+                                <td>' + response.client.idcard + '</td>\
+                                <td>' + response.client.cars_number + '</td>\
+                                <td>' + response.client.logs_number + '</td>\
+                            </tr>\
+                            </table>');
+                }
             }
         });
     }
