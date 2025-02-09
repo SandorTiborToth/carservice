@@ -42,7 +42,7 @@
                 @foreach($clients as $index => $client)
                 <tr>
                     <td class="client_id"><?= $client->id ?></td>
-                    <td class="client_name"><?= $client->name ?></td>
+                    <td class="client_name" data-clicked="false"><?= $client->name ?></td>
                     <td><?= $client->idcard ?></td>
                 </tr>
                 <tr>

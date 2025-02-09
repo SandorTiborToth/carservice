@@ -14,14 +14,13 @@ $(document).ready(function(){
     /*
     * Show the cars of the specified client who was clicked on
     */
-    let showed = false;
     $(document).on('click', '.client_name', function(){
         let table = $(this).parent().next().find('table');
-        if (showed) {
-            showed = false;
+        if ($(this).attr('data-clicked') == "true") {
+            $(this).attr('data-clicked','false');
             table.html('');
         }else{
-            showed = true;
+            $(this).attr('data-clicked','true');
             let client_id = $(this).siblings('.client_id').html();
             
             $.ajax({
