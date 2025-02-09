@@ -106,6 +106,8 @@ $(document).ready(function(){
     */
     $(document).on('submit', '.client_idcard_form', function(event){
         event.preventDefault();
+        $('.search_result').html('');
+        $('.warning').html('');
 
         let clients_name_value = $.trim($('#clients_name').val());
         let clients_idcard_value = $.trim($('#clients_idcard').val());
@@ -119,7 +121,6 @@ $(document).ready(function(){
             $('.warning').html('Csak az egyik mezőt töltse ki!');
         
         }else{
-            $('.warning').html('');
             if (clients_name_value != "") {
                 submit_clients_name($('#clients_name').val());
             }else{
@@ -137,7 +138,6 @@ $(document).ready(function(){
             data: { 'client_name_pattern' : client_name_pattern },
             dataType: "json",
             success: function(response){
-                $('.search_result').html('');
                 $('.search_result').append('<table><tr>\
                             <th>Ügyfél azonosítója</th>\
                             <th>Ügyfél neve</th>\
@@ -165,22 +165,25 @@ $(document).ready(function(){
             data: { 'client_idcard_pattern' : client_idcard_pattern },
             dataType: "json",
             success: function(response){
-                $('.search_result').html('');
-                $('.search_result').append('<table><tr>\
-                            <th>Ügyfél azonosítója</th>\
-                            <th>Ügyfél neve</th>\
-                            <th>Ügyfél okmányazonosítója</th>\
-                            <th>Autóinak darabszáma</th>\
-                            <th>Összes naplóbejegyzés száma</th>\
-                        </tr>\
-                        <tr>\
-                            <td>' + response.client.id + '</td>\
-                            <td>' + response.client.name + '</td>\
-                            <td>' + response.client.idcard + '</td>\
-                            <td></td>\
-                            <td></td>\
-                        </tr>\
-                        </table>');                
+                if (response.client == null) {
+                    $('.warning').html('A megadott "' + client_idcard_pattern + '" azonosítóhoz nem tartozik ügyfél.');
+                }else{
+                    $('.search_result').append('<table><tr>\
+                                <th>Ügyfél azonosítója</th>\
+                                <th>Ügyfél neve</th>\
+                                <th>Ügyfél okmányazonosítója</th>\
+                                <th>Autóinak darabszáma</th>\
+                                <th>Összes naplóbejegyzés száma</th>\
+                            </tr>\
+                            <tr>\
+                                <td>' + response.client.id + '</td>\
+                                <td>' + response.client.name + '</td>\
+                                <td>' + response.client.idcard + '</td>\
+                                <td></td>\
+                                <td></td>\
+                            </tr>\
+                            </table>');
+                }
             }
         });        
     }
