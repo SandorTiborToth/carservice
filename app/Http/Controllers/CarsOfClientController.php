@@ -8,17 +8,6 @@ use App\Models\Service;
 
 class CarsOfClientController extends Controller
 {
-    /*public function getCarsOfClient(Request $request)
-    {   
-        $cars = Car::where('client_id', $_GET['client_id'])->get();
-        
-        return response()->json([
-            'cars' => $cars
-        ]);
-    }*/
-
-
-
     public function getCarsOfClient(Request $request)
     {   
         $client_id = $_GET['client_id'];
