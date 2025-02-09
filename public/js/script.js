@@ -40,7 +40,7 @@ $(document).ready(function(){
                             </tr>');
                     $.each(response.cars, function(key, item){
                         table.append('<tr>\
-                                    <td class="car_serial" data-client-id="' + client_id + '">' + item.car_id + '</td>\
+                                    <td class="car_serial" data-client-id="' + client_id + '" data-clicked="false">' + item.car_id + '</td>\
                                     <td>' + item.type + '</td>\
                                     <td>' + item.registered + '</td>\
                                     <td>' + item.ownbrand + '</td>\
@@ -59,35 +59,50 @@ $(document).ready(function(){
     * Show the service log of the specified car
     */
     $(document).on('click', '.car_serial', function(){
-        let car_id = $(this).html();
+
+        /*let car_id = $(this).html();
         let client_id = $(this).attr('data-client-id');
         
-        $(this).parent().after('<tr><td colspan="5"><table></table></td></tr>');
+        $(this).parent().after('<tr><td colspan="5"><table></table></td></tr>');*/
 
-        let table = $(this).parent().next().find('table');
 
-        $.ajax({
-            type: "GET",
-            url: "/get-services-of-car",
-            data: { 'client_id' : client_id, 'car_id' : car_id },
-            dataType: "json",
-            success: function(response){
-                table.append('<tr>\
-                            <th>Alkalom sorszáma</th>\
-                            <th>Esemény neve</th>\
-                            <th>Esemény időpontja</th>\
-                            <th>Munkalap azonosító</th>\
-                        </tr>');
-                $.each(response.services, function(key, item){
+        if ($(this).attr('data-clicked') == 'true') {
+            $(this).attr('data-clicked','false');
+            let table = $(this).parent().next().find('table');
+            table.html('');
+        }else{
+            $(this).attr('data-clicked','true');
+
+            let car_id = $(this).html();
+            let client_id = $(this).attr('data-client-id');
+            
+            $(this).parent().after('<tr><td colspan="5"><table></table></td></tr>');
+
+            let table = $(this).parent().next().find('table');
+
+            $.ajax({
+                type: "GET",
+                url: "/get-services-of-car",
+                data: { 'client_id' : client_id, 'car_id' : car_id },
+                dataType: "json",
+                success: function(response){
                     table.append('<tr>\
-                                <td>' + item.lognumber + '</td>\
-                                <td>' + item.event + '</td>\
-                                <td>' + item.eventtime + '</td>\
-                                <td>' + item.document_id + '</td>\
+                                <th>Alkalom sorszáma</th>\
+                                <th>Esemény neve</th>\
+                                <th>Esemény időpontja</th>\
+                                <th>Munkalap azonosító</th>\
                             </tr>');
-                });
-            }
-        });
+                    $.each(response.services, function(key, item){
+                        table.append('<tr>\
+                                    <td>' + item.lognumber + '</td>\
+                                    <td>' + item.event + '</td>\
+                                    <td>' + item.eventtime + '</td>\
+                                    <td>' + item.document_id + '</td>\
+                                </tr>');
+                    });
+                }
+            });
+        }
     });
 
 
