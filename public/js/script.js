@@ -76,7 +76,7 @@ $(document).ready(function(){
             let car_id = $(this).html();
             let client_id = $(this).attr('data-client-id');
             
-            $(this).parent().after('<tr><td colspan="5"><table></table></td></tr>');
+            $(this).parent().after('<tr><td colspan="7"><table></table></td></tr>');
 
             let table = $(this).parent().next().find('table');
 
