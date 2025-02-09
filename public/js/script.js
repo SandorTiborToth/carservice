@@ -93,10 +93,12 @@ $(document).ready(function(){
                                 <th>Munkalap azonosító</th>\
                             </tr>');
                     $.each(response.services, function(key, item){
+                        let time = '';
+                        if (item.event == "regisztralt") { time = item.registered; } else { time = item.eventtime; }
                         table.append('<tr>\
                                     <td>' + item.lognumber + '</td>\
                                     <td>' + item.event + '</td>\
-                                    <td>' + item.eventtime + '</td>\
+                                    <td>' + time + '</td>\
                                     <td>' + item.document_id + '</td>\
                                 </tr>');
                     });
