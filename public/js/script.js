@@ -11,15 +11,19 @@ $(document).ready(function(){
         $(this).css("text-decoration", "none");
     });
 
+    $('.cars_of_client').hide();
+    
     /*
     * Show the cars of the specified client who was clicked on
     */
     $(document).on('click', '.client_name', function(){
         let table = $(this).parent().next().find('table');
         if ($(this).attr('data-clicked') == "true") {
+            $(this).parent().next().hide();
             $(this).attr('data-clicked','false');
             table.html('');
         }else{
+            $(this).parent().next().show();
             $(this).attr('data-clicked','true');
             let client_id = $(this).siblings('.client_id').html();
             
@@ -30,13 +34,13 @@ $(document).ready(function(){
                 dataType: "json",
                 success: function(response){
                     table.append('<tr>\
-                                <th>Autó sorszáma</th>\
-                                <th>Autó típusa</th>\
-                                <th>Regisztrálás időpontja</th>\
-                                <th>Saját márkás-e</th>\
-                                <th>Balesetek száma</th>\
-                                <th>Utolsó szervízbejegyzés</th>\
-                                <th>Utolsó szervízbejegyzés dátuma</th>\
+                                <th scope="col">Autó sorszáma</th>\
+                                <th scope="col">Autó típusa</th>\
+                                <th scope="col">Regisztrálás időpontja</th>\
+                                <th scope="col">Saját márkás-e</th>\
+                                <th scope="col">Balesetek száma</th>\
+                                <th scope="col">Utolsó szervízbejegyzés</th>\
+                                <th scope="col">Utolsó szervízbejegyzés dátuma</th>\
                             </tr>');
                     $.each(response.cars, function(key, item){
                         table.append('<tr>\
@@ -69,7 +73,7 @@ $(document).ready(function(){
             let car_id = $(this).html();
             let client_id = $(this).attr('data-client-id');
             
-            $(this).parent().after('<tr><td colspan="7"><table></table></td></tr>');
+            $(this).parent().after('<tr><td colspan="7"><table class="table table-hover"></table></td></tr>');
 
             let table = $(this).parent().next().find('table');
 
@@ -80,10 +84,10 @@ $(document).ready(function(){
                 dataType: "json",
                 success: function(response){
                     table.append('<tr>\
-                                <th>Alkalom sorszáma</th>\
-                                <th>Esemény neve</th>\
-                                <th>Esemény időpontja</th>\
-                                <th>Munkalap azonosító</th>\
+                                <th scope="col">Alkalom sorszáma</th>\
+                                <th scope="col">Esemény neve</th>\
+                                <th scope="col">Esemény időpontja</th>\
+                                <th scope="col">Munkalap azonosító</th>\
                             </tr>');
                     $.each(response.services, function(key, item){
                         let time = '';

@@ -1,8 +1,4 @@
-.search_area{
-    border: 2px solid deepskyblue;
-}
-
-.clients{
+.search_area, .clients{
     border: 2px solid seagreen;
 }
 
